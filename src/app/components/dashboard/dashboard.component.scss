@@ -1,0 +1,38 @@
+:host {
+  width: 100%;
+  background-color: hsl(228, 9%, 10%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.container {
+  max-width: 1280px;
+}
+
+
+
+app-hero {
+  display: flex;
+}
+
+table {
+  background-color: hsl(228, 9%, 10%);
+
+  * {
+    color: white;
+  }
+
+  .mat-mdc-row .mdc-data-table__row {
+    border-bottom: 2px solid white;
+  }
+}
+
+.posValue {
+  color: green !important;
+}
+
+.negValue {
+  color: red !important;
+}

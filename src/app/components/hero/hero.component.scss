@@ -1,0 +1,39 @@
+:host {
+    color: white;
+    box-sizing: border-box;
+
+
+
+}
+
+
+main{
+    display: flex;
+    height: 100%;
+    margin: 100px 20px; 
+    height: 450px;
+    gap: 45px;
+}
+
+// TBD figure out why on :host doesn't work element selection instead of section
+section{
+
+    width: 530px;
+    height: 100%;
+}
+
+h1{
+    font-size: 4rem;
+    line-height: 6.4rem;
+    padding-top: 25px;
+}
+
+h5{
+    padding: 20px 0;
+font-size: 2rem;
+}
+
+img{
+    width: 540px;
+    height: 448px;
+}

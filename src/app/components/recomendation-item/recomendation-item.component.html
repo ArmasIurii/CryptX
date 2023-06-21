@@ -1,0 +1,18 @@
+<section>
+  <img src="{{ data.image }}" alt="" />
+  <h4>{{ data.id | titlecase }}</h4>
+  <h4>{{ data.symbol + "/USD" | uppercase }}</h4>
+</section>
+<h2>{{ "USD " + data.current_price }}</h2>
+
+<article>
+  <h3>{{ data.price_change_24h }}</h3>
+  <h3
+    [ngClass]="{
+      posValue: data.price_change_24h / data.current_price > 0,
+      negValue: data.price_change_24h / data.current_price < 0
+    }"
+  >
+    {{ data | percentage }}
+  </h3>
+</article>
