@@ -16,6 +16,9 @@ import { MatTableModule } from '@angular/material/table';
 import { PercentagePipe } from './percentage.pipe';
 import { RecomendationComponent } from './components/recomendation/recomendation.component';
 import { RecomendationItemComponent } from './components/recomendation-item/recomendation-item.component';
+import { CoinDetailsComponent } from './coin-details/coin-details.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { RecomendationItemComponent } from './components/recomendation-item/reco
     PercentagePipe,
     RecomendationComponent,
     RecomendationItemComponent,
+    CoinDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { RecomendationItemComponent } from './components/recomendation-item/reco
     MatInputModule,
     HttpClientModule,
     MatTableModule,
+    CanvasJSAngularChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

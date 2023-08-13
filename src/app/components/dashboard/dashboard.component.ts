@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Subject, take } from 'rxjs';
+import { Subject} from 'rxjs';
 import { ApiDataService } from 'src/app/api-data.service';
 
 @Component({
