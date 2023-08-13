@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { inject } from '@angular/core';
+import { inject, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { CoinInterface } from './coin.type';
 
@@ -9,12 +9,14 @@ import { CoinInterface } from './coin.type';
 })
 export class ApiDataService {
   private apiUrl = 'https://api.coingecko.com/api/v3/coins';
+  private apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
   private apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
+  private apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=30';
 
   http = inject(HttpClient);
 
   apiResponseSubject: Subject<CoinInterface[]> = new Subject<any>();
-  recomendations!:CoinInterface[]
+  recomendations!: CoinInterface[]
 
   getData(): Observable<any> {
     const url = this.apiUrlMainData;
@@ -25,7 +27,7 @@ export class ApiDataService {
     const url = this.apiUrlMainData;
 
     return this.http.get<any>(url).subscribe((val) =>
-       val
+      val
         .sort(
           (
             a: { price_change_percentage_24h: number },
@@ -50,5 +52,15 @@ export class ApiDataService {
     const url = this.apiUrlMainData;
 
     return this.http.get<any>(url)
+  }
+
+  getCoinPrice(){
+    const url = this.apiCoinPrice
+    return this.http.get<any>(url)
+  }
+
+  getMarketGraph() {
+    const url = this.apiUrlMarketGraph;
+    return this.http.get<any>(url, { responseType: 'json' })
   }
 }
