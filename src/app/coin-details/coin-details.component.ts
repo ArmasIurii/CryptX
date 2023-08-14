@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ApiDataService } from '../api-data.service';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-coin-details',
@@ -10,10 +11,13 @@ import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
 })
 export class CoinDetailsComponent implements OnInit, OnDestroy {
 
-  coinPrice = new Subject
+  coinPrice: Subject<any> = new Subject<any>()
+
+  coinDetails: Subject<any> = new Subject<any>()
 
   http = inject(HttpClient)
   apiService = inject(ApiDataService)
+  route = inject(ActivatedRoute)
 
 
   dataPoints: any[] = [];
@@ -22,7 +26,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   yValue: number = 10;
   newDataCount: number = 10;
   chart: any;
-  solana!: number
+  currentCoinId!: any
 
   chartOptions = {
     animationEnabled: true,
@@ -42,14 +46,30 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.getCoinPrice()
+    this.route.paramMap.subscribe(params => {
+      this.currentCoinId = params.get('id'); // '+' is used to convert the string to a number
+      // this.getCoinPrice( this.currentCoinId)
+
+      this.getCoinDetails(this.currentCoinId)
+      this.getCoinPrice(this.currentCoinId)
+    });
+
+
 
   }
 
-  getCoinPrice() {
-    console.log('getCoinPrice');
-    this.apiService.getCoinPrice().subscribe((val) => {
-      this.coinPrice.next(val.solana.usd), console.log(val.solana.usd);
+  getCoinPrice(currentCoinId: any) {
+
+    this.apiService.getCoinPrice(currentCoinId).subscribe((val) => {
+      this.coinPrice.next(val[this.currentCoinId].usd), console.log(val[this.currentCoinId].usd);
+
+    });
+  }
+
+  getCoinDetails(currentCoinId: any) {
+
+    this.apiService.getCoinDetails(currentCoinId).subscribe((val) => {
+      this.coinDetails.next(val), console.log(val);
     });
 
   }
@@ -64,7 +84,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateData = () => {
-    this.apiService.getMarketGraph().subscribe((val) => { this.addData(val.prices) }
+    this.apiService.getMarketGraph(this.currentCoinId).subscribe((val) => { this.addData(val.prices) }
     )
   }
 

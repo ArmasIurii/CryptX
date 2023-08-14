@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { PercentagePipe } from './percentage.pipe';
 import { RecomendationComponent } from './components/recomendation/recomendation.component';
-import { RecomendationItemComponent } from './components/recomendation-item/recomendation-item.component';
+import { RecomendationItemComponent } from './components/recomendation/components/recomendation-item/recomendation-item.component';
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 

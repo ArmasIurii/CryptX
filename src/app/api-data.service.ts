@@ -8,14 +8,18 @@ import { CoinInterface } from './coin.type';
   providedIn: 'root',
 })
 export class ApiDataService {
-  private apiUrl = 'https://api.coingecko.com/api/v3/coins';
-  private apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
-  private apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
-  private apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/solana/market_chart?vs_currency=usd&days=30';
+  apiUrl = 'https://api.coingecko.com/api/v3/coins';
+  apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies=usd';
+
+  coinDetailsUrl = 'https://api.coingecko.com/api/v3/coins/{id}';
+
+  apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
+  apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days=30';
 
   http = inject(HttpClient);
 
   apiResponseSubject: Subject<CoinInterface[]> = new Subject<any>();
+
   recomendations!: CoinInterface[]
 
   getData(): Observable<any> {
@@ -54,13 +58,18 @@ export class ApiDataService {
     return this.http.get<any>(url)
   }
 
-  getCoinPrice(){
-    const url = this.apiCoinPrice
+  getCoinDetails(coinPathId: any) {
+    const url = this.coinDetailsUrl.replace('{id}', coinPathId.toString())
     return this.http.get<any>(url)
   }
 
-  getMarketGraph() {
-    const url = this.apiUrlMarketGraph;
+  getMarketGraph(coinPathId: any) {
+    const url = this.apiUrlMarketGraph.replace('{id}', coinPathId.toString())
     return this.http.get<any>(url, { responseType: 'json' })
+  }
+
+  getCoinPrice(coinPathId: any) {
+    const url = this.apiCoinPrice.replace('{id}', coinPathId.toString())
+    return this.http.get<any>(url)
   }
 }

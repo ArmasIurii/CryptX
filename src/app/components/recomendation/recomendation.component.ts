@@ -36,5 +36,5 @@ export class RecomendationComponent implements OnInit{
         
         console.log(this.recomendationArray)}
       )
-  }
+  } 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject} from 'rxjs';
 import { ApiDataService } from 'src/app/api-data.service';
 
@@ -9,6 +10,7 @@ import { ApiDataService } from 'src/app/api-data.service';
 })
 export class DashboardComponent implements OnInit {
   apiDataService = inject(ApiDataService);
+  router = inject(Router);
 
   apiResponseSubject: Subject<any> = new Subject<any>();
   recomendations: Subject<any> = new Subject<any>();
@@ -48,4 +50,9 @@ export class DashboardComponent implements OnInit {
     'current_price',
     'trade',
   ];
+
+  openCoinDetails(coin:object){
+    console.log(coin);
+    this.router.navigate(['/coin',coin])
+  }
 }

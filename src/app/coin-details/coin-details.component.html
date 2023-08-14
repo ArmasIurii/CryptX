@@ -1,9 +1,16 @@
 <app-nav-bar> </app-nav-bar>
-<div>
-	<canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height: '360px'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>    
-</div>  
 
-<div>price</div>
-<div>
-    {{coinPrice | async}}
-</div>                      
+<div class="container">
+  <div>price</div>
+  <div >
+    {{ (coinPrice | async)}}
+  </div>
+
+  <div>
+    <canvasjs-chart
+      [options]="chartOptions"
+      [styles]="{ width: '100%', height: '360px' }"
+      (chartInstance)="getChartInstance($event)"
+    ></canvasjs-chart>
+  </div>
+</div>
