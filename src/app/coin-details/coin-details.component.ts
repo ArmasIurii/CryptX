@@ -3,6 +3,7 @@ import { ApiDataService } from '../api-data.service';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { UrlDomainPipe } from '../url-domain.pipe';
 
 @Component({
   selector: 'app-coin-details',
@@ -48,23 +49,22 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
     this.route.paramMap.subscribe(params => {
       this.currentCoinId = params.get('id'); // '+' is used to convert the string to a number
-      // this.getCoinPrice( this.currentCoinId)
 
       this.getCoinDetails(this.currentCoinId)
-      this.getCoinPrice(this.currentCoinId)
+      // this.getCoinPrice(this.currentCoinId)
     });
 
 
 
   }
 
-  getCoinPrice(currentCoinId: any) {
+  // getCoinPrice(currentCoinId: any) {
 
-    this.apiService.getCoinPrice(currentCoinId).subscribe((val) => {
-      this.coinPrice.next(val[this.currentCoinId].usd), console.log(val[this.currentCoinId].usd);
+  //   this.apiService.getCoinPrice(currentCoinId).subscribe((val) => {
+  //     this.coinPrice.next(val[this.currentCoinId].usd), console.log(val[this.currentCoinId].usd);
 
-    });
-  }
+  //   });
+  // }
 
   getCoinDetails(currentCoinId: any) {
 

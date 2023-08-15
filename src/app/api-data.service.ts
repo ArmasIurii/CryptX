@@ -9,7 +9,7 @@ import { CoinInterface } from './coin.type';
 })
 export class ApiDataService {
   apiUrl = 'https://api.coingecko.com/api/v3/coins';
-  apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies=usd';
+  // apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies=usd';
 
   coinDetailsUrl = 'https://api.coingecko.com/api/v3/coins/{id}';
 
@@ -68,8 +68,8 @@ export class ApiDataService {
     return this.http.get<any>(url, { responseType: 'json' })
   }
 
-  getCoinPrice(coinPathId: any) {
-    const url = this.apiCoinPrice.replace('{id}', coinPathId.toString())
-    return this.http.get<any>(url)
-  }
+  // getCoinPrice(coinPathId: any) {
+  //   const url = this.apiCoinPrice.replace('{id}', coinPathId.toString())
+  //   return this.http.get<any>(url)
+  // }
 }

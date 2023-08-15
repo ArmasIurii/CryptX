@@ -1,7 +1,23 @@
-:host {
-}
 
 .container {
   width: 1170px;
   display: block;
+}
+
+.header{
+    display: flex;
+}
+
+article{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    width: 100%;
+    max-width: 800px;
+    div{
+        display: flex;
+        justify-content: space-between;
+        width: 350px;
+    }
 }

@@ -18,6 +18,7 @@ import { RecomendationComponent } from './components/recomendation/recomendation
 import { RecomendationItemComponent } from './components/recomendation/components/recomendation-item/recomendation-item.component';
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { UrlDomainPipe } from './url-domain.pipe';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     RecomendationComponent,
     RecomendationItemComponent,
     CoinDetailsComponent,
+    UrlDomainPipe,
   ],
   imports: [
     BrowserModule,
