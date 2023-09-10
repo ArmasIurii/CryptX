@@ -19,6 +19,7 @@ import { RecomendationItemComponent } from './components/recomendation/component
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { UrlDomainPipe } from './url-domain.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { UrlDomainPipe } from './url-domain.pipe';
     RecomendationComponent,
     RecomendationItemComponent,
     CoinDetailsComponent,
-    UrlDomainPipe,
+    UrlDomainPipe
   ],
   imports: [
     BrowserModule,
@@ -44,8 +45,9 @@ import { UrlDomainPipe } from './url-domain.pipe';
     HttpClientModule,
     MatTableModule,
     CanvasJSAngularChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -5,6 +5,9 @@ import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UrlDomainPipe } from '../url-domain.pipe';
 
+declare var bootstrap: any; // Declare Bootstrap
+
+
 @Component({
   selector: 'app-coin-details',
   templateUrl: './coin-details.component.html',
@@ -15,6 +18,8 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   coinPrice: Subject<any> = new Subject<any>()
 
   coinDetails: Subject<any> = new Subject<any>()
+  
+  coinExchangePrice: Subject<any> = new Subject<any>()
 
   http = inject(HttpClient)
   apiService = inject(ApiDataService)
@@ -28,6 +33,9 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   newDataCount: number = 10;
   chart: any;
   currentCoinId!: any
+
+  firstValue!: number
+  secondValue!: number
 
   chartOptions = {
     animationEnabled: true,
@@ -45,6 +53,15 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     }]
   }
 
+
+  onCelsiusChange() {
+    this.secondValue = (this.firstValue * 9 / 5) + 32;
+  }
+
+  onFahrenheitChange() {
+    this.firstValue = (this.secondValue - 32) * 5 / 9;
+  }
+
   ngOnInit() {
 
     this.route.paramMap.subscribe(params => {
@@ -52,6 +69,9 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
       this.getCoinDetails(this.currentCoinId)
       // this.getCoinPrice(this.currentCoinId)
+
+      bootstrap.Dropdown.getInstance(document.getElementById('dropdownMenuButton'));
+
     });
 
 
@@ -70,6 +90,11 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
     this.apiService.getCoinDetails(currentCoinId).subscribe((val) => {
       this.coinDetails.next(val), console.log(val);
+    });
+
+    this.apiService.getExchangeValue().subscribe((val) => {
+      this.coinExchangePrice.next(val), console.log((val));
+       
     });
 
   }
@@ -104,5 +129,9 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     this.newDataCount = 1;
     this.chart.render();
 
+  }
+
+  isNotEmptyString(str: string): boolean {
+    return str.trim() !== '';
   }
 }

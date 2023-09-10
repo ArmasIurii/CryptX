@@ -2,31 +2,33 @@
 
 <div class="container">
   <div class="header" *ngIf="coinDetails | async as coinData">
+    <!-- number details about the coin -->
     <div class="description__general">
       <span> Rank #{{ coinData.market_data.market_cap_rank }}</span>
 
       <aside>
         <img [src]="coinData.image.small" alt="" />
-        <span>
-          <b>{{ coinData.name }}</b></span
-        >
+
+        <b>{{ coinData.name }}</b>
         <span> {{ coinData.symbol | uppercase }}</span>
       </aside>
 
       <aside>
-        <b> {{ coinData.market_data.current_price.usd }}</b>
+        <b>$ {{ coinData.market_data.current_price.usd }}</b>
         <i class="bi bi-arrow-up-short"></i>
         <span> {{ coinData.market_data.price_change_percentage_24h }} %</span>
       </aside>
 
-      <aside>WhatchList</aside>
+      <aside class="watchlist">
+        On {{ coinData.watchlist_portfolio_users }} watchlists
+      </aside>
 
       <aside>Divider</aside>
 
       <article>
         <div>
           <span>Market Cap</span>
-          <b> {{ coinData.market_data.market_cap.usd }}</b>
+          <b>$ {{ coinData.market_data.market_cap.usd }}</b>
         </div>
         <div>
           <span>Total Supply</span>
@@ -52,25 +54,27 @@
       <!-- <span> {{ coinData.sentiment_votes_up_percentage }} </span>
         <span> {{ coinData.sentiment_votes_down_percentage }} </span> -->
     </div>
-    <div class="info__container">
+
+    <!-- Info & links about coin -->
+    <div class="info__container" *ngIf="coinData as coinData">
       <span><b>Info</b></span>
 
       <article>
         <p>Website</p>
-        <div *ngFor="let website of coinData.links.homepage">
-          <span *ngIf="website">
-            {{ website | urlDomain }}
-          </span>
-        </div>
+        <span>
+          {{ coinData.website | urlDomain }}
+        </span>
       </article>
 
       <article>
         <p>Explorers</p>
-        <div *ngFor="let blockchain of coinData.links.blockchain_site">
-          <span *ngIf="blockchain">
-            {{ blockchain | urlDomain }}
-          </span>
-        </div>
+        <h6>
+          <div *ngFor="let blockchain of coinData.links.blockchain_site">
+            <ng-container *ngIf="isNotEmptyString(blockchain)">
+              {{ blockchain | urlDomain }}
+            </ng-container>
+          </div>
+        </h6>
       </article>
 
       <article>
@@ -112,7 +116,6 @@
     </div>
   </div>
 
-
   <div>
     <span>General</span>
     <span>Social</span>
@@ -120,25 +123,11 @@
     <span>Develope</span>
   </div>
 
-
   <div>
     <canvasjs-chart
       [options]="chartOptions"
       [styles]="{ width: '100%', height: '360px' }"
       (chartInstance)="getChartInstance($event)"
     ></canvasjs-chart>
-  </div>
-
-  <div class="coin-converter">
-
-    <div class="input-group">
-      <span class="input-group-addon">Text</span>
-      <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-    </div>
-
-    <div class="input-group">
-      <span class="input-group-addon">Text</span>
-      <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-    </div>
   </div>
 </div>
