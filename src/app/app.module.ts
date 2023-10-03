@@ -13,13 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { HeroComponent } from './components/hero/hero.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { PercentagePipe } from './percentage.pipe';
+import { PercentagePipe } from './pipes/percentage.pipe';
 import { RecomendationComponent } from './components/recomendation/recomendation.component';
 import { RecomendationItemComponent } from './components/recomendation/components/recomendation-item/recomendation-item.component';
-import { CoinDetailsComponent } from './coin-details/coin-details.component';
+import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { UrlDomainPipe } from './url-domain.pipe';
 import { FormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { GrowDirectionDirective } from './directive/grow-direction.directive';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     RecomendationComponent,
     RecomendationItemComponent,
     CoinDetailsComponent,
-    UrlDomainPipe
+    UrlDomainPipe,
+    GrowDirectionDirective
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatTableModule,
     CanvasJSAngularChartsModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

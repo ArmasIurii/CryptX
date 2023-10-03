@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CoinDetailsComponent } from './coin-details/coin-details.component';
+import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
 
 
 const routes: Routes = [

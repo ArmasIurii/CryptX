@@ -1,0 +1,186 @@
+<app-nav-bar> </app-nav-bar>
+
+<div class="container">
+  <div class="header" *ngIf="coinDetails | async as coinData">
+    <!-- number details about the coin -->
+    <div class="description__general">
+      <span> Rank #{{ coinData.market_data.market_cap_rank }}</span>
+
+      <aside class="coin__name">
+        <img [src]="coinData.image.small" alt="Coin Logo" />
+
+        <b>{{ coinData.name }}</b>
+        <span> {{ coinData.symbol | uppercase }}</span>
+      </aside>
+
+      <aside>
+        <b>$ {{ coinData.market_data.current_price.usd | number : "1.2-2" }}</b>
+        <i class="bi bi-arrow-up-short"></i>
+        <!-- ///////////////////////////////// -->
+        <span
+          [appGrowDirection]="coinData.market_data.price_change_percentage_24h"
+        >
+          <b> {{ coinData.market_data.price_change_percentage_24h }} % </b>
+        </span>
+        <!--  -->
+      </aside>
+
+      <aside class="watchlist">
+        <span>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </span>
+        <span>
+          <i class="fa-regular fa-bell"></i>
+        </span>
+        <span>
+          <i class="fa-solid fa-star star--colored"></i>
+        </span>
+        <span>
+          <i class="fa-solid fa-star star--colored"></i>
+
+          <b> On {{ coinData.watchlist_portfolio_users }} watchlists</b>
+        </span>
+      </aside>
+
+      <aside class="progress-bar">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="progress"
+        ></mat-progress-bar>
+        <div>
+          <b> {{ coinData.market_data.low_24h.usd | currency : "USD" }}</b>
+          <b>24H Range</b>
+          <b> {{ coinData.market_data.high_24h.usd | currency : "USD" }}</b>
+        </div>
+      </aside>
+
+      <article>
+        <div>
+          <span>Market Cap</span>
+          <b>$ {{ coinData.market_data.market_cap.usd | number }}</b>
+        </div>
+        <div>
+          <span>Total Supply</span>
+          <b> {{ coinData.market_data.total_supply }}</b>
+        </div>
+
+        <div>
+          <span>Max Supply</span>
+          <b> {{ coinData.market_data.max_supply }}</b>
+        </div>
+
+        <div>
+          <span>Circulating Supply</span>
+          <b> {{ coinData.market_data.circulating_supply }}</b>
+        </div>
+
+        <div>
+          <span>All Time Hitgh</span>
+          <b> {{ coinData.market_data.ath.usd }}</b>
+        </div>
+      </article>
+
+      <!-- <span> {{ coinData.sentiment_votes_up_percentage }} </span>
+        <span> {{ coinData.sentiment_votes_down_percentage }} </span> -->
+    </div>
+
+    <!-- Info & links about coin -->
+    <div class="info__container" *ngIf="coinData as coinData">
+      <span><b>Info</b></span>
+
+      <article>
+        <p>Website</p>
+        <span>
+          {{ coinData.links.homepage[0] | urlDomain }}
+        </span>
+      </article>
+
+      <article>
+        <p>Explorers</p>
+        <div>
+          <span *ngFor="let blockchain of filteredBlockchainSites">
+            {{ blockchain | urlDomain }}
+          </span>
+        </div>
+      </article>
+
+      <article>
+        <p>Community</p>
+        <div>
+          <span>
+            <i class="bi bi-arrow-up-short"></i>
+            Reddit
+          </span>
+
+          <span>
+            <i class="bi bi-arrow-up-short"></i>
+            Facebook
+            <!-- facebook_username -->
+          </span>
+          <span *ngFor="let communitySites of filteredCommunitySites">
+            {{ communitySites | urlDomain }}
+          </span>
+        </div>
+      </article>
+      <article>
+        <p>Search on</p>
+        <span>
+          <i class="bi bi-arrow-up-short"></i>
+          Twitter
+          <!-- twitter_screen_name -->
+        </span>
+      </article>
+      <article>
+        <p>Source Code</p>
+        <span>
+          <span>
+            {{ coinData.links.repos_url.github | urlDomain }}
+          </span>
+          <i class="bi bi-arrow-up-short"></i>
+        </span>
+      </article>
+      <article>
+        <p>Tags</p>
+        <span>Cryptocurrency</span>
+      </article>
+    </div>
+  </div>
+
+  <div>
+    <button mat-button>General</button>
+    <button mat-button>Social</button>
+    <button mat-button>Description</button>
+    <button mat-button>Develope</button>
+  </div>
+
+  <div class="chart">
+    <article class="chart--period">
+      <button (click)="updateData(1)" mat-button>
+        <span >24h</span>
+      </button>
+      <button (click)="updateData(7)" mat-button>
+        <span >7d</span>
+      </button>
+      <button (click)="updateData(14)" mat-button>
+        <span >14d</span>
+      </button>
+      <button (click)="updateData(30)" mat-button>
+        <span >30d</span>
+      </button>
+      <button (click)="updateData(90)" mat-button>
+        <span >90d</span>
+      </button>
+      <button (click)="updateData(180)" mat-button>
+        <span >180d</span>
+      </button>
+      <button (click)="updateData(365)" mat-button>
+        <span >1y</span>
+      </button>
+    </article>
+    <canvasjs-chart
+      [options]="chartOptions"
+      [styles]="{ width: '100%', height: '360px' }"
+      (chartInstance)="getChartInstance($event)"
+    ></canvasjs-chart>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ApiDataService } from '../api-data.service';
+import { ApiDataService } from '../../api-data.service';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { UrlDomainPipe } from '../url-domain.pipe';
+import { UrlDomainPipe } from '../../url-domain.pipe';
+
 
 declare var bootstrap: any; // Declare Bootstrap
 
@@ -18,8 +19,12 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   coinPrice: Subject<any> = new Subject<any>()
 
   coinDetails: Subject<any> = new Subject<any>()
-  
+
   coinExchangePrice: Subject<any> = new Subject<any>()
+
+  progress: number = 50;
+  filteredBlockchainSites: string[] = [];
+  filteredCommunitySites: string[] = [];
 
   http = inject(HttpClient)
   apiService = inject(ApiDataService)
@@ -68,38 +73,44 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
       this.currentCoinId = params.get('id'); // '+' is used to convert the string to a number
 
       this.getCoinDetails(this.currentCoinId)
-      // this.getCoinPrice(this.currentCoinId)
-
-      bootstrap.Dropdown.getInstance(document.getElementById('dropdownMenuButton'));
 
     });
 
+    this.coinDetails.subscribe(val => {
 
+      this.filteredBlockchainSites = this.filterEmptyStrings(val.links.blockchain_site);
+      this.filteredCommunitySites = this.filterEmptyStrings(val.links.official_forum_url);
+    })
+    console.log(this.dataPoints);
 
   }
-
-  // getCoinPrice(currentCoinId: any) {
-
-  //   this.apiService.getCoinPrice(currentCoinId).subscribe((val) => {
-  //     this.coinPrice.next(val[this.currentCoinId].usd), console.log(val[this.currentCoinId].usd);
-
-  //   });
-  // }
 
   getCoinDetails(currentCoinId: any) {
 
     this.apiService.getCoinDetails(currentCoinId).subscribe((val) => {
-      this.coinDetails.next(val), console.log(val);
+      this.coinDetails.next(val)
+
+      this.progress = this.getHighLow24(val.market_data)
+
     });
 
     this.apiService.getExchangeValue().subscribe((val) => {
-      this.coinExchangePrice.next(val), console.log((val));
-       
+      this.coinExchangePrice.next(val)
+
     });
 
   }
 
+  getHighLow24(market: any): number {
+    let progress = Math.round(((market.current_price.usd - market.low_24h.usd) / (market.high_24h.usd - market.low_24h.usd)) * 100)
+
+
+    return progress > 2 ? progress : 2 // this was made because of API bug(sometimes value was negative)
+  }
+
   getChartInstance(chart: object) {
+    console.log(chart);
+    
     this.chart = chart;
     this.updateData();
   }
@@ -108,12 +119,17 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeout);
   }
 
-  updateData = () => {
-    this.apiService.getMarketGraph(this.currentCoinId).subscribe((val) => { this.addData(val.prices) }
+  updateData(period = 30) {
+console.log(this.chartOptions);
+
+this.apiService.getMarketGraph(this.currentCoinId, period).subscribe((val) => {
+  this.addData(val.prices)
+    }
     )
   }
 
   addData = (data: any) => {
+    this.dataPoints = []
     if (this.newDataCount != 1) {
       data.forEach((val: any[]) => {
 
@@ -126,12 +142,17 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
       this.xValue++;
       this.yValue = parseInt(data[0][1]);
     }
-    this.newDataCount = 1;
+
+    this.chartOptions.data[0].dataPoints = this.dataPoints
+
     this.chart.render();
 
   }
 
-  isNotEmptyString(str: string): boolean {
-    return str.trim() !== '';
+  filterEmptyStrings(array: string[]): string[] {
+
+    return array.filter(item => !!item);
+
   }
+
 }
