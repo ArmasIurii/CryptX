@@ -61,22 +61,24 @@
         </div>
         <div>
           <span>Total Supply</span>
-          <b> {{ coinData.market_data.total_supply }}</b>
+          <b> {{ coinData.market_data.total_supply | number : "1.2-2" }}</b>
         </div>
 
         <div>
           <span>Max Supply</span>
-          <b> {{ coinData.market_data.max_supply }}</b>
+          <b> {{ coinData.market_data.max_supply | number }}</b>
         </div>
 
         <div>
           <span>Circulating Supply</span>
-          <b> {{ coinData.market_data.circulating_supply }}</b>
+          <b>
+            {{ coinData.market_data.circulating_supply | number : "1.2-2" }}</b
+          >
         </div>
 
         <div>
           <span>All Time Hitgh</span>
-          <b> {{ coinData.market_data.ath.usd }}</b>
+          <b> {{ coinData.market_data.ath.usd | number : "1.2-2" }}</b>
         </div>
       </article>
 
@@ -154,27 +156,13 @@
   </div>
 
   <div class="chart">
+
     <article class="chart--period">
-      <button (click)="updateData(1)" mat-button>
-        <span >24h</span>
-      </button>
-      <button (click)="updateData(7)" mat-button>
-        <span >7d</span>
-      </button>
-      <button (click)="updateData(14)" mat-button>
-        <span >14d</span>
-      </button>
-      <button (click)="updateData(30)" mat-button>
-        <span >30d</span>
-      </button>
-      <button (click)="updateData(90)" mat-button>
-        <span >90d</span>
-      </button>
-      <button (click)="updateData(180)" mat-button>
-        <span >180d</span>
-      </button>
-      <button (click)="updateData(365)" mat-button>
-        <span >1y</span>
+      <button mat-button *ngFor="let button of chartPeriod" 
+        (click)="updateGraphData(button.period)"
+        [class.selected]="button.selected"
+      >
+        <span> {{ button.label }} </span>
       </button>
     </article>
     <canvasjs-chart

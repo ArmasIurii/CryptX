@@ -30,6 +30,16 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   apiService = inject(ApiDataService)
   route = inject(ActivatedRoute)
 
+  chartPeriod = [
+    { label: '24h', period: 1, selected: false},
+    { label: '7d', period: 7, selected: false},
+    { label: '14d', period: 14, selected: false},
+    { label: '30d', period: 30, selected: true},
+    { label: '90d', period: 90, selected: false},
+    { label: '180d', period: 180, selected: false},
+    { label: '1year', period: 365, selected: false},
+  ]
+
 
   dataPoints: any[] = [];
   timeout: any = null;
@@ -110,22 +120,25 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
   getChartInstance(chart: object) {
     console.log(chart);
-    
+
     this.chart = chart;
-    this.updateData();
+    this.updateGraphData();
   }
 
   ngOnDestroy() {
     clearTimeout(this.timeout);
   }
 
-  updateData(period = 30) {
-console.log(this.chartOptions);
+  updateGraphData(period = 30) {
+    console.log(this.chartOptions);
 
-this.apiService.getMarketGraph(this.currentCoinId, period).subscribe((val) => {
-  this.addData(val.prices)
+    this.apiService.getMarketGraph(this.currentCoinId, period).subscribe((val) => {
+      this.addData(val.prices)
     }
     )
+    this.chartPeriod.forEach(button => {
+      button.selected = button.period === period;
+    });
   }
 
   addData = (data: any) => {
