@@ -16,6 +16,7 @@ export class ApiDataService {
 
   apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
   apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={period}';
+  apiSearch = 'https://api.coingecko.com/api/v3/search?query={id}'
 
   http = inject(HttpClient);
 
@@ -73,8 +74,8 @@ export class ApiDataService {
     return this.http.get<any>(this.exchangeRatesUrl)
   }
 
-  // getCoinPrice(coinPathId: any) {
-  //   const url = this.apiCoinPrice.replace('{id}', coinPathId.toString())
-  //   return this.http.get<any>(url)
-  // }
+  getSearchData(coinId: string) {
+    const url = this.apiSearch.replace('{id}', coinId)
+    return this.http.get<any>(url)
+  }
 }

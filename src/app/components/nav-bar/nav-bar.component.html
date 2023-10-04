@@ -25,11 +25,18 @@
         <mat-icon>share</mat-icon>
       </button>
     </section>
-  
+
     <mat-form-field appearance="fill">
       <mat-icon matPrefix>search</mat-icon>
-      <input matInput placeholder="Search" />
+      <input
+        [(ngModel)]="searchQuery"
+        (keydown.enter)="onSearch()"
+        matInput
+        placeholder="Search"
+        (focus)="onInputFocus()"
+        (blur)="onInputBlur()"
+      />
     </mat-form-field>
+    <span *ngIf="openDropDown" class="nav__search-drop-down">DROP</span>
   </mat-toolbar>
-  
 </div>

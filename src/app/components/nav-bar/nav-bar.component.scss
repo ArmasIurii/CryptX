@@ -2,6 +2,7 @@ mat-toolbar {
   justify-content: space-between;
   width: 1230px;
   margin: 0 auto;
+  position: relative;
 }
 
 :host {
@@ -9,25 +10,35 @@ mat-toolbar {
     align-items: center;
   }
   ::ng-deep .mat-mdc-form-field-subscript-wrapper {
-   display: none;
+    display: none;
   }
 
- ::ng-deep .mat-mdc-text-field-wrapper, ::ng-deep .mat-mdc-form-field-flex{
+  ::ng-deep .mat-mdc-text-field-wrapper,
+  ::ng-deep .mat-mdc-form-field-flex {
     height: 36px;
-    color:#673ab7;
+    color: #673ab7;
   }
 }
 
-section{
-    display: flex;
+section {
+  display: flex;
 }
 
-section > span{
-    display: flex;
-    align-items: center;
+section > span {
+  display: flex;
+  align-items: center;
 }
 
-div{
+div {
   width: 100%;
   background-color: #673ab7;
+}
+
+  .nav__search-drop-down {
+    position: absolute;
+    background-color: lime;
+    right: 1.6rem;
+    top: 4.9rem;
+    width: 24.8rem;
+  
 }
