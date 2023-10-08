@@ -92,58 +92,63 @@
 
       <article>
         <p>Website</p>
-        <span>
+        <a (click)="openLink(coinData.links.homepage[0])">
           {{ coinData.links.homepage[0] | urlDomain }}
-        </span>
+        </a>
       </article>
 
       <article>
         <p>Explorers</p>
         <div>
-          <span *ngFor="let blockchain of filteredBlockchainSites">
+          <a
+            (click)="openLink(blockchain)"
+            *ngFor="let blockchain of filteredBlockchainSites"
+          >
             {{ blockchain | urlDomain }}
-          </span>
+          </a>
         </div>
       </article>
 
       <article>
         <p>Community</p>
         <div>
-          <span>
+          <a (click)="openLink(coinData.links.subreddit_url)">
             <i class="bi bi-arrow-up-short"></i>
             Reddit
-          </span>
+          </a>
 
-          <span>
+          <a (click)="openLink(coinData.links.facebook_username)">
             <i class="bi bi-arrow-up-short"></i>
             Facebook
-            <!-- facebook_username -->
-          </span>
-          <span *ngFor="let communitySites of filteredCommunitySites">
+          </a>
+          <a
+            (click)="openLink(communitySites)"
+            *ngFor="let communitySites of filteredCommunitySites"
+          >
             {{ communitySites | urlDomain }}
-          </span>
+          </a>
         </div>
       </article>
       <article>
         <p>Search on</p>
-        <span>
+        <a>
           <i class="bi bi-arrow-up-short"></i>
           Twitter
           <!-- twitter_screen_name -->
-        </span>
+        </a>
       </article>
       <article>
         <p>Source Code</p>
-        <span>
-          <span>
+        <a>
+          <a (click)="openLink(coinData.links.repos_url.github)">
             {{ coinData.links.repos_url.github | urlDomain }}
-          </span>
+          </a>
           <i class="bi bi-arrow-up-short"></i>
-        </span>
+        </a>
       </article>
       <article>
         <p>Tags</p>
-        <span>Cryptocurrency</span>
+        <a>Cryptocurrency</a>
       </article>
     </div>
   </div>
@@ -156,9 +161,10 @@
   </div>
 
   <div class="chart">
-
     <article class="chart--period">
-      <button mat-button *ngFor="let button of chartPeriod" 
+      <button
+        mat-button
+        *ngFor="let button of chartPeriod"
         (click)="updateGraphData(button.period)"
         [class.selected]="button.selected"
       >
@@ -170,5 +176,14 @@
       [styles]="{ width: '100%', height: '360px' }"
       (chartInstance)="getChartInstance($event)"
     ></canvasjs-chart>
+  </div>
+
+  <div>
+    <span> How do you feel about BNB today? </span>
+    <div>
+      <span>
+        Vote to see community's results! sentiment_votes_up_percentage :
+      </span>
+    </div>
   </div>
 </div>
