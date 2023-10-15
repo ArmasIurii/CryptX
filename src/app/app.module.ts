@@ -22,6 +22,10 @@ import { UrlDomainPipe } from './url-domain.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GrowDirectionDirective } from './directive/grow-direction.directive';
+import { LoginComponent } from './components/login/login.component';
+import { MatCardModule } from '@angular/material/card';
+import { HoverDirective } from './hover.directive';
+
 
 
 @NgModule({
@@ -35,7 +39,9 @@ import { GrowDirectionDirective } from './directive/grow-direction.directive';
     RecomendationItemComponent,
     CoinDetailsComponent,
     UrlDomainPipe,
-    GrowDirectionDirective
+    GrowDirectionDirective,
+    LoginComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ import { GrowDirectionDirective } from './directive/grow-direction.directive';
     MatTableModule,
     CanvasJSAngularChartsModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
