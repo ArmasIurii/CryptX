@@ -60,6 +60,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
+      hoverEffect
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       (click)="openCoinDetails(row)"
