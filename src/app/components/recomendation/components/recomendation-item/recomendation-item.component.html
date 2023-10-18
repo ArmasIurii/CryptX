@@ -3,7 +3,7 @@
   <h4>{{ data.id | titlecase }}</h4>
   <h4>{{ data.symbol + "/USD" | uppercase }}</h4>
 </section>
-<h2>{{ "USD " + data.current_price }}</h2>
+<h2>{{ "USD " + (data.current_price | currency:'USD')}}</h2>
 
 <article>
   <h3>{{ data.price_change_24h }}</h3>
