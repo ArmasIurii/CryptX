@@ -25,6 +25,7 @@ import { GrowDirectionDirective } from './directive/grow-direction.directive';
 import { LoginComponent } from './components/login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { HoverDirective } from './hover.directive';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -41,7 +42,7 @@ import { HoverDirective } from './hover.directive';
     UrlDomainPipe,
     GrowDirectionDirective,
     LoginComponent,
-    HoverDirective
+    HoverDirective,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,9 @@ import { HoverDirective } from './hover.directive';
     CanvasJSAngularChartsModule,
     FormsModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+    MatRippleModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],
