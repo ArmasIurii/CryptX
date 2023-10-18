@@ -26,17 +26,31 @@
       </button>
     </section>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" #inputListener>
       <mat-icon matPrefix>search</mat-icon>
       <input
+        (click)="openDropDown(searchQuery)"
         [(ngModel)]="searchQuery"
-        (keydown.enter)="onSearch()"
+        (ngModelChange)="onSearch($event)"
         matInput
         placeholder="Search"
-        (focus)="onInputFocus()"
-        (blur)="onInputBlur()"
       />
+      <!-- ngModelChange should be changed above -->
     </mat-form-field>
-    <span *ngIf="openDropDown" class="nav__search-drop-down">DROP</span>
+    <span
+      *ngIf="isDropOpen$ | async"
+      class="nav__search-drop-down"
+      #inputListener
+    >
+      <div *ngFor="let coin of searchData | async; let i = index">
+        <button mat-button class="nav__drop-down-item">
+          <span>
+            <img [src]="coin.large" class="item-icon" />
+            <div class="item-id">{{ coin.name }}</div>
+          </span>
+          <div class="item-rank">#{{ coin.market_cap_rank }}</div>
+        </button>
+      </div>
+    </span>
   </mat-toolbar>
 </div>
