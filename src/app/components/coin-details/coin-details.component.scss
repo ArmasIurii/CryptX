@@ -133,6 +133,17 @@
     }
   }
 }
+/////////////////////////////////////////////////////////////////
+
+.converter__general{
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0;
+
+  .general{
+    width: 65%;
+  }
+}
 
 ////////////////////////   chart  ///////////////////////////////
 .chart {

@@ -1,14 +1,11 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, ViewChild } from '@angular/core';
 import { ApiDataService } from '../../api-data.service';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject, Subject, Subscription, interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UrlDomainPipe } from '../../url-domain.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
-declare var bootstrap: any; // Declare Bootstrap
-
+import { ConverterComponent } from '../converter/converter.component';
 
 @Component({
   selector: 'app-coin-details',
@@ -21,7 +18,14 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
   coinDetails: Subject<any> = new Subject<any>()
 
+  coinMarketPrice: Subject<any> = new Subject<any>()
+
   coinExchangePrice: Subject<any> = new Subject<any>()
+
+  infoText: string = 'Default Information';
+
+  @ViewChild(ConverterComponent) converter!: ConverterComponent
+
 
   progress: number = 50;
   filteredBlockchainSites: string[] = [];
@@ -70,13 +74,8 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     }]
   }
 
-
-  onCelsiusChange() {
-    this.secondValue = (this.firstValue * 9 / 5) + 32;
-  }
-
-  onFahrenheitChange() {
-    this.firstValue = (this.secondValue - 32) * 5 / 9;
+  updateInfo(newText: string): void {
+    // this.infoText = this.coinDetails.subscribe(val => );
   }
 
   ngOnInit() {
@@ -105,6 +104,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
     this.apiService.getCoinDetails(currentCoinId).subscribe((val) => {
       this.coinDetails.next(val)
+      this.converter.coinDetails.next(val)
       console.log(val);
 
       this.progress = this.getHighLow24(val.market_data)

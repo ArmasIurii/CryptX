@@ -1,0 +1,42 @@
+<mat-card>
+  <h1>Converter</h1>
+
+  <mat-form-field>
+    <mat-label>Favorite Food</mat-label>
+    <mat-select [formControl]="coinConvert" name="valute">
+      <mat-option>{{ selectedValute }}</mat-option>
+      <mat-option *ngFor="let valute of valuteList" [value]="valute">{{
+        valute
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>From Currency to make dynamic</mat-label>
+    <input
+      matInput
+      [(ngModel)]="fromCurrency"
+      (ngModelChange)="convertToCurrency()"
+      placeholder="Enter currency"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>To Currency to make dynamic</mat-label>
+    <input
+      matInput
+      [(ngModel)]="toCurrency"
+      placeholder="Enter currency"
+      (ngModelChange)="convertFromCurrency()"
+    />
+  </mat-form-field>
+
+  <!-- <button mat-raised-button color="primary" (click)="convert()">Convert</button> -->
+
+  <div *ngIf="result !== null" class="result">
+    <p>Result: {{ result }}</p>
+  </div>
+  <h2>
+    {{ (coinDetails | async)?.usd }}
+  </h2>
+</mat-card>

@@ -19,13 +19,21 @@ import { RecomendationItemComponent } from './components/recomendation/component
 import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { UrlDomainPipe } from './url-domain.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { GrowDirectionDirective } from './directive/grow-direction.directive';
 import { LoginComponent } from './components/login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { HoverDirective } from './hover.directive';
 import { MatRippleModule } from '@angular/material/core';
+import { ConverterComponent } from './components/converter/converter.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { VoteCoinComponent } from './vote-coin/vote-coin.component';
+import { MatChipsModule } from '@angular/material/chips';
+
+
+
 
 
 
@@ -43,6 +51,8 @@ import { MatRippleModule } from '@angular/material/core';
     GrowDirectionDirective,
     LoginComponent,
     HoverDirective,
+    ConverterComponent,
+    VoteCoinComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +68,11 @@ import { MatRippleModule } from '@angular/material/core';
     FormsModule,
     MatProgressBarModule,
     MatCardModule,
-    MatRippleModule
-
+    MatRippleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

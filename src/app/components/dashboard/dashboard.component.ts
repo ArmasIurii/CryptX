@@ -51,8 +51,7 @@ export class DashboardComponent implements OnInit {
     'trade',
   ];
 
-  openCoinDetails(coin:object){
-    console.log(coin);
-    this.router.navigate(['/coin',coin])
+  openCoinDetails(coin:{id:string}){
+    this.router.navigate(['/coin',coin.id])
   }
 }
