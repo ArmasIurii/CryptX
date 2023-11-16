@@ -8,9 +8,9 @@ import { CoinInterface } from './coin.type';
   providedIn: 'root',
 })
 export class ApiDataService {
-  apiUrl = 'https://api.coingecko.com/api/v3/coins';
-  // apiCoinPrice = 'https://api.coingecko.com/api/v3/simple/price?ids={id}&vs_currencies=usd';
+  private backEndUrl = 'http://localhost:4000'; // Replace with your actual backend URL
 
+  apiUrl = 'https://api.coingecko.com/api/v3/coins';
   coinDetailsUrl = 'https://api.coingecko.com/api/v3/coins/{id}';
   exchangeRatesUrl = 'https://api.coingecko.com/api/v3//exchange_rates';
 
@@ -77,5 +77,12 @@ export class ApiDataService {
   getSearchData(coinId: string) {
     const url = this.apiSearch.replace('{id}', coinId)
     return this.http.get<any>(url)
+  }
+
+  login(email: string, password: string): Observable<any> {
+    const data = { email, password };
+    const loginUrl = `${this.backEndUrl}/login`; // Your login API endpoint
+
+    return this.http.post(loginUrl, data);
   }
 }

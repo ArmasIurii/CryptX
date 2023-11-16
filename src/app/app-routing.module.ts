@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'coin', component: CoinDetailsComponent },
+  { path: 'coin/:id', component: CoinDetailsComponent },
   { path: 'login', component: LoginComponent },
 ];
 
