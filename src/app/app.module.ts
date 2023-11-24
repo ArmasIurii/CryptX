@@ -31,10 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { VoteCoinComponent } from './vote-coin/vote-coin.component';
 import { MatChipsModule } from '@angular/material/chips';
-
-
-
-
+import { DescriptionComponent } from './components/description/description.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -53,6 +52,8 @@ import { MatChipsModule } from '@angular/material/chips';
     HoverDirective,
     ConverterComponent,
     VoteCoinComponent,
+    DescriptionComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +73,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSelectModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
