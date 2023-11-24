@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject} from 'rxjs';
 import { ApiDataService } from 'src/app/api-data.service';
+import { ThemingService } from 'src/app/theming.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import { ApiDataService } from 'src/app/api-data.service';
 export class DashboardComponent implements OnInit {
   apiDataService = inject(ApiDataService);
   router = inject(Router);
+  themeService = inject(ThemingService);
 
   apiResponseSubject: Subject<any> = new Subject<any>();
   recomendations: Subject<any> = new Subject<any>();
@@ -53,5 +55,17 @@ export class DashboardComponent implements OnInit {
 
   openCoinDetails(coin:{id:string}){
     this.router.navigate(['/coin',coin.id])
+  }
+
+  setDefaultTheme(): void {
+    this.themeService.setDefaultTheme();
+  }
+
+  setDarkTheme(): void {
+    this.themeService.setDarkTheme();
+  }
+
+  setCustomTheme(): void {
+    this.themeService.setCustomTheme();
   }
 }

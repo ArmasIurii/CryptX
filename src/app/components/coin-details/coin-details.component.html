@@ -150,46 +150,21 @@
         <p>Tags</p>
         <a>Cryptocurrency</a>
       </article>
-      <h1>
-        Implement button toggle for graph timelapse / chips, (angular material
-        chips)
-      </h1>
     </div>
   </div>
 
-  <div class="converter__general">
-    <div class="general">
-     <div class="general__select-buttons">
-      <button mat-button (click)="updateInfo('General')">General</button>
-      <button mat-button (click)="updateInfo('Social')">Social</button>
-      <button mat-button (click)="updateInfo('Description')">Description</button>
-      <button mat-button (click)="updateInfo('Developer')">Developer</button>
-     </div>
-     <div *ngIf="false" class="content">
-      {{(coinDetails | async).description.en}}
-     </div>
-     <article *ngIf="coinDetails | async as coinData">
-      <a (click)="openLink(coinData.links.subreddit_url)">
-        <i class="bi bi-arrow-up-short"></i>
-        Reddit
-      </a>
-
-      <a (click)="openLink(coinData.links.facebook_username)">
-        <i class="bi bi-arrow-up-short"></i>
-        Facebook
-      </a>
-   </article>
-    </div>
+  <div class="description__converter-block">
+    <app-description></app-description>
     <app-converter></app-converter>
   </div>
 
   <div class="chart">
     <mat-chip-listbox class="chart--period">
       <mat-chip-option
-      [selected]="button.period === 30"
-            *ngFor="let button of chartPeriod"
-      (click)="updateGraphData(button.period)"
-      [class.selected]="button.selected"
+        [selected]="button.period === 30"
+        *ngFor="let button of chartPeriod"
+        (click)="updateGraphData(button.period)"
+        [class.selected]="button.selected"
       >
         <span> {{ button.label }} </span>
       </mat-chip-option>

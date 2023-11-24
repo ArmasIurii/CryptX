@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { inject, ChangeDetectorRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CoinInterface } from './coin.type';
+import { CoinInterface } from './coin.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +10,15 @@ import { CoinInterface } from './coin.type';
 export class ApiDataService {
   private backEndUrl = 'http://localhost:4000'; // Replace with your actual backend URL
 
-  apiUrl = 'https://api.coingecko.com/api/v3/coins';
-  coinDetailsUrl = 'https://api.coingecko.com/api/v3/coins/{id}';
-  exchangeRatesUrl = 'https://api.coingecko.com/api/v3//exchange_rates';
+  private apiUrl = 'https://api.coingecko.com/api/v3/coins';
+  private coinDetailsUrl = 'https://api.coingecko.com/api/v3/coins/{id}';
+  private exchangeRatesUrl = 'https://api.coingecko.com/api/v3//exchange_rates';
 
-  apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
-  apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={period}';
-  apiSearch = 'https://api.coingecko.com/api/v3/search?query={id}'
+  private apiUrlMainData = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&sparkline=false';
+  private apiUrlMarketGraph = 'https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={period}';
+  private apiSearch = 'https://api.coingecko.com/api/v3/search?query={id}'
+
+  coinDetails = new Subject<CoinInterface>()
 
   http = inject(HttpClient);
 
@@ -62,6 +64,8 @@ export class ApiDataService {
 
   getCoinDetails(coinPathId: any) {
     const url = this.coinDetailsUrl.replace('{id}', coinPathId.toString())
+    this.http.get<CoinInterface>(url).subscribe(val => this.coinDetails.next(val))
+
     return this.http.get<any>(url)
   }
 

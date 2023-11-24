@@ -135,14 +135,13 @@
 }
 /////////////////////////////////////////////////////////////////
 
-.converter__general{
+.description__converter-block {
   display: flex;
   justify-content: space-between;
   margin: 4rem 0;
-
-  .general{
-    width: 65%;
-  }
+}
+app-description {
+  width: 65%;
 }
 
 ////////////////////////   chart  ///////////////////////////////

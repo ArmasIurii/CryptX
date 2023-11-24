@@ -74,9 +74,6 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     }]
   }
 
-  updateInfo(newText: string): void {
-    // this.infoText = this.coinDetails.subscribe(val => );
-  }
 
   ngOnInit() {
 
@@ -111,10 +108,10 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
 
     });
 
-    this.apiService.getExchangeValue().subscribe((val) => {
-      this.coinExchangePrice.next(val)
+    // this.apiService.getExchangeValue().subscribe((val) => {
+    //   this.coinExchangePrice.next(val)
 
-    });
+    // });
 
   }
 
