@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, inject } from '@angular/core';
 import { BehaviorSubject, Subject, debounceTime, filter, map, skip, switchMap, takeUntil, tap } from 'rxjs';
 import { ApiDataService } from 'src/app/api-data.service';
-import { CoinInterface } from 'src/app/coin.type';
+import { CoinInterface } from 'src/app/coin.interface';
 import { EventsService } from 'src/app/events.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CoinInterface } from '../coin.type';
+import { CoinInterface } from '../coin.interface';
 
 @Pipe({
   name: 'percentage'

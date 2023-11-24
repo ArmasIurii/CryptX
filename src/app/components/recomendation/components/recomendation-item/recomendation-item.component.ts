@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { ApiDataService } from 'src/app/api-data.service';
-import { CoinInterface } from 'src/app/coin.type';
+import { CoinInterface } from 'src/app/coin.interface';
 
 @Component({
   selector: 'app-recomendation-item',
