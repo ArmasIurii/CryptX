@@ -1,6 +1,5 @@
 :host {
   width: 100%;
-  background-color: hsl(228, 9%, 10%);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -47,7 +46,6 @@ ng-container {
 .mat-column-trade {
 
   .trade__btn {
-    background-color: #673ab7;
     padding: 0 30px;
   }
 }

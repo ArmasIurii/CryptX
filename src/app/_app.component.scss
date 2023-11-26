@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+@mixin color($color){
+        background-color:$color;
+    
+}
+
+@mixin theme($color){
+    $color:$color;
+    @include color($color)
+}

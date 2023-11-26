@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use './theming/components' as component;
 @import '@angular/material/theming';
 @include mat.core();
 
@@ -7,30 +8,3 @@
 html, body { height: 100%; font-size: 10px; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// Default Theme
-$default-primary: mat-palette($mat-indigo);
-$default-accent: mat-palette($mat-pink, A200, A100, A400);
-$default-theme: mat-light-theme($default-primary, $default-accent);
-
-// Dark Theme
-$dark-primary: mat-palette($mat-deep-purple);
-$dark-accent: mat-palette($mat-amber, A200, A100, A400);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent);
-
-// Custom Theme
-$custom-primary: mat-palette($mat-green);
-$custom-accent: mat-palette($mat-orange, A200, A100, A400);
-$custom-theme: mat-light-theme($custom-primary, $custom-accent);
-
-// Apply the default theme
-@include angular-material-theme($default-theme);
-
-// Dark theme styles
-[data-theme='dark'] {
-  @include angular-material-theme($dark-theme);
-}
-
-// Custom theme styles
-[data-theme='custom'] {
-  @include angular-material-theme($custom-theme);
-}
