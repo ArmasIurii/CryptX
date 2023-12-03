@@ -1,10 +1,20 @@
 @use "@angular/material" as mat;
 
-@mixin color($color) {
-  background-color: $color;
+@mixin color($background-color, $table-background) {
+  background-color: $background-color;
+
+  .mat-mdc-table {
+    background: $table-background;
+  }
+  
+  .mat-mdc-table .mdc-data-table__row {
+    background-color: transparent;
+  }
 }
 
-@mixin theme($color) {
-  $color: $color;
-  @include color($color);
+@mixin theme($background-color, $table-background) {
+  $background-color: $background-color;
+  $table-background: $table-background;
+
+  @include color($background-color, $table-background);
 }

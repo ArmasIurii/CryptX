@@ -1,0 +1,14 @@
+@use "@angular/material" as mat;
+
+@mixin color($color) {
+  .mat-mdc-card{
+  --mdc-elevated-card-container-color: #{$color};
+  }
+}
+
+@mixin theme($color) {
+  $color: $color;
+
+  @include color($color);
+}
+ 

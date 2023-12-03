@@ -1,7 +1,9 @@
-<h2><b>Highlights</b></h2>
+<mat-card color="primary">
+  <h2><b>Highlights</b></h2>
 
-<section>
-  <div *ngFor="let coin of recomendationArray">
-    <app-recomendation-item matRipple [data]="coin"></app-recomendation-item>
-  </div>
-</section>
+  <section>
+    <div *ngFor="let coin of recomendationArray">
+      <app-recomendation-item matRipple [data]="coin"></app-recomendation-item>
+    </div>
+  </section>
+</mat-card>

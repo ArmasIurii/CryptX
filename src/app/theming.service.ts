@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ThemingService {
 
-  private currentThemeSubject = new BehaviorSubject<string>('default');
+  private currentThemeSubject = new BehaviorSubject<string>('deep-purple');
   currentTheme$ = this.currentThemeSubject.asObservable();
 
   setTheme(theme: string): void {
@@ -14,15 +14,19 @@ export class ThemingService {
     this.currentThemeSubject.next(theme);
   }
 
-  setDefaultTheme(): void {
-    this.setTheme('default');
+  setDeepPurpleTheme(): void {
+    this.setTheme('deep-purple');
   }
 
-  setDarkTheme(): void {
-    this.setTheme('dark');
+  setIndigoPinkTheme(): void {
+    this.setTheme('indigo-pink');
   }
 
-  setCustomTheme(): void {
-    this.setTheme('custom');
+  setPinkTheme(): void {
+    this.setTheme('mat-pink');
+  }
+
+  setPurpleTheme(): void {
+    this.setTheme('mat-purple');
   }
 }

@@ -57,15 +57,19 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/coin',coin.id])
   }
 
-  setDefaultTheme(): void {
-    this.themeService.setDefaultTheme();
+  setDeepPurpleTheme(): void {
+    this.themeService.setDeepPurpleTheme();
   }
 
-  setDarkTheme(): void {
-    this.themeService.setDarkTheme();
+  setIndigoPinkTheme(): void {
+    this.themeService.setIndigoPinkTheme();
   }
 
-  setCustomTheme(): void {
-    this.themeService.setCustomTheme();
+  setPinkTheme(): void {
+    this.themeService.setPinkTheme();
+  }
+
+  setPurpleTheme(): void {
+    this.themeService.setPurpleTheme();
   }
 }

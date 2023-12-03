@@ -1,4 +1,10 @@
 <app-nav-bar> </app-nav-bar>
+<div class="theme-buttons">
+  <button mat-button (click)="setDeepPurpleTheme()">deep-purple Theme</button>
+  <button mat-button (click)="setIndigoPinkTheme()">indigo-pink Theme</button>
+  <button mat-button (click)="setPinkTheme()">Pink Theme</button>
+  <button mat-button (click)="setPurpleTheme()">Purple Theme</button>
+</div>
 <div class="container">
   <app-hero></app-hero>
 
@@ -70,8 +76,4 @@
   </table>
 </div>
 
-<div class="theme-buttons">
-  <button mat-button (click)="setDefaultTheme()">Default Theme</button>
-  <button mat-button (click)="setDarkTheme()">Dark Theme</button>
-  <button mat-button (click)="setCustomTheme()">Custom Theme</button>
-</div>
+
