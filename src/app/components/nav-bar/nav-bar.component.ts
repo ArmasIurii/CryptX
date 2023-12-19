@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, inject } from '@angular/core';
-import { BehaviorSubject, Subject, debounceTime, filter, map, skip, switchMap, takeUntil, tap } from 'rxjs';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
+import { BehaviorSubject, Subject, debounceTime, filter, takeUntil, tap } from 'rxjs';
 import { ApiDataService } from 'src/app/api-data.service';
-import { CoinInterface } from 'src/app/coin.interface';
 import { EventsService } from 'src/app/events.service';
+import { HamburgerComponent } from '../hamburger/hamburger.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,14 +11,15 @@ import { EventsService } from 'src/app/events.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-
   searchQuery!: string
   isOpen!: boolean
   searchData: Subject<any> = new Subject
+  showOverlay = false;
 
   searchApi = inject(ApiDataService)
   elementRef = inject(ElementRef)
   eventsService = inject(EventsService)
+  dialog = inject(MatDialog)
 
   #destroy$: Subject<void> = new Subject<void>();
 
@@ -39,7 +41,7 @@ export class NavBarComponent implements OnInit {
     ).subscribe()
 
   }
- 
+
   onSearch(query: string) {
     this.searchQuery = query; // Update the local query variable
     this.searchApiData(); // Fetch data when the query changes
@@ -66,9 +68,12 @@ export class NavBarComponent implements OnInit {
         this.searchData.next(filteredData.slice(0, 7));
       });
 
-      //ask about if on each function call is an additional subscribe and why debounce doent work
+    //ask about if on each function call is an additional subscribe and why debounce doent work
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(HamburgerComponent);
+  }
 
   ngOnDestroy() {
     this.#destroy$.next();

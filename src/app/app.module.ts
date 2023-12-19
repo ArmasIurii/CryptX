@@ -34,6 +34,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { DescriptionComponent } from './components/description/description.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HamburgerComponent } from './components/hamburger/hamburger.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -54,6 +59,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     VoteCoinComponent,
     DescriptionComponent,
     SignUpComponent,
+    ThemeToggleComponent,
+    HamburgerComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +82,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ReactiveFormsModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

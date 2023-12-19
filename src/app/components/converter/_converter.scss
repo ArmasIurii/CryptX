@@ -1,0 +1,23 @@
+@use "@angular/material" as mat;
+
+@mixin color($text-color, $dialogs-text) {
+  $text-color: $text-color;
+  $dialogs-text: $dialogs-text;
+
+  app-converter {
+    mat-card {
+      --mdc-elevated-card-container-color:#{$dialogs-text};
+      padding: 2rem;
+      h1 {
+        color: #{$text-color};
+      }
+    }
+  }
+}
+
+@mixin theme($text-color, $dialogs-text) {
+  $text-color: $text-color;
+  $dialogs-text: $dialogs-text;
+
+  @include color($text-color, $dialogs-text);
+}

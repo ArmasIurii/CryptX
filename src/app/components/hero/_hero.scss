@@ -1,0 +1,17 @@
+@use "@angular/material" as mat;
+
+@mixin color($text-color) {
+
+ h1{
+  color: $text-color;
+ }
+ h5{
+  color: $text-color;
+ }
+}
+
+@mixin theme($text-color) {
+  $text-color: $text-color;
+
+  @include color($text-color);
+}

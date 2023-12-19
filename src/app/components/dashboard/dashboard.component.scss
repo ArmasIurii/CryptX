@@ -17,11 +17,6 @@ app-hero {
 }
 
 table {
-  background-color: --mdc-elevated-card-container-color;
-
-  * {
-    color: white;
-  }
 
   .mat-mdc-row .mdc-data-table__row {
     border-bottom: 2px solid white;

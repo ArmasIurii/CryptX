@@ -1,0 +1,40 @@
+@use "@angular/material" as mat;
+
+@mixin color($text-color, $dialogs-text, $chips-light, $chips-dark) {
+  app-coin-details {
+    color: #{$text-color};
+
+    .info__container {
+      a {
+        color: rgb(17, 17, 17);
+      }
+    }
+
+    .general__select-buttons {
+      .mdc-button__label {
+        color: #{$text-color};
+      }
+    }
+    .description__general {
+      aside.watchlist b {
+        color: #{$dialogs-text};
+      }
+    }
+    .mat-mdc-standard-chip:not(.mat-mdc-standard-chip.mat-primary.mat-mdc-chip-selected) {
+      --mdc-chip-elevated-container-color: #{$chips-light};
+
+      span {
+        --mdc-chip-label-text-color: #{$chips-dark};
+      }
+    }
+  }
+}
+
+@mixin theme($text-color, $dialogs-text, $chips-light, $chips-dark) {
+  $text-color: $text-color;
+  $dialogs-text: $dialogs-text;
+  $chips-light: $chips-light;
+  $chips-dark: $chips-dark;
+
+  @include color($text-color, $dialogs-text, $chips-light, $chips-dark);
+}

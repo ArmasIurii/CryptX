@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UrlDomainPipe } from '../../url-domain.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConverterComponent } from '../converter/converter.component';
+import { ThemingService } from 'src/app/theming.service';
 
 @Component({
   selector: 'app-coin-details',
@@ -15,17 +16,12 @@ import { ConverterComponent } from '../converter/converter.component';
 export class CoinDetailsComponent implements OnInit, OnDestroy {
 
   coinPrice: Subject<any> = new Subject<any>()
-
   coinDetails: Subject<any> = new Subject<any>()
-
   coinMarketPrice: Subject<any> = new Subject<any>()
-
   coinExchangePrice: Subject<any> = new Subject<any>()
-
   infoText: string = 'Default Information';
 
   @ViewChild(ConverterComponent) converter!: ConverterComponent
-
 
   progress: number = 50;
   filteredBlockchainSites: string[] = [];
@@ -35,6 +31,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   apiService = inject(ApiDataService)
   route = inject(ActivatedRoute)
   sanitizer = inject(DomSanitizer)
+  themingService = inject(ThemingService)
 
   chartPeriod = [
     { label: '24h', period: 1, selected: false },
@@ -54,6 +51,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   newDataCount: number = 10;
   chart: any;
   currentCoinId!: any
+  isDarkTheme!: boolean
 
   firstValue!: number
   secondValue!: number
@@ -61,7 +59,7 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   chartOptions = {
     animationEnabled: true,
     zoomEnabled: true,
-    theme: "light2",
+    theme: 'dark1',
     title: {
       text: "Live Data"
     },
@@ -89,8 +87,13 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
       this.filteredBlockchainSites = this.filterEmptyStrings(val.links.blockchain_site);
       this.filteredCommunitySites = this.filterEmptyStrings(val.links.official_forum_url);
     })
-    console.log(this.dataPoints);
 
+    this.themingService.isDarkTheme$.subscribe(val => {this.isDarkTheme = val
+      this.chartOptions.theme = val ? 'dark2' : 'light2'
+      this.chart.render();
+      console.log(this.isDarkTheme)})
+    ;
+    
   }
 
   openLink(url: string) {
@@ -98,27 +101,15 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   }
 
   getCoinDetails(currentCoinId: any) {
-
     this.apiService.getCoinDetails(currentCoinId).subscribe((val) => {
       this.coinDetails.next(val)
       this.converter.coinDetails.next(val)
-      console.log(val);
-
       this.progress = this.getHighLow24(val.market_data)
-
     });
-
-    // this.apiService.getExchangeValue().subscribe((val) => {
-    //   this.coinExchangePrice.next(val)
-
-    // });
-
   }
 
   getHighLow24(market: any): number {
     let progress = Math.round(((market.current_price.usd - market.low_24h.usd) / (market.high_24h.usd - market.low_24h.usd)) * 100)
-
-
     return progress > 2 ? progress : 2 // this was made because of API bug(sometimes value was negative)
   }
 
@@ -134,8 +125,6 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateGraphData(period = 30) {
-    console.log(this.chartOptions);
-
     this.apiService.getMarketGraph(this.currentCoinId, period).subscribe((val) => {
       this.addData(val.prices)
     }
@@ -149,27 +138,19 @@ export class CoinDetailsComponent implements OnInit, OnDestroy {
     this.dataPoints = []
     if (this.newDataCount != 1) {
       data.forEach((val: any[]) => {
-
         this.dataPoints.push({ x: new Date(val[0]), y: parseFloat(val[1].toFixed(2)) });
         this.yValue = parseInt(val[1]);
       })
     } else {
-      //this.dataPoints.shift();
       this.dataPoints.push({ x: data[0][0], y: parseInt(data[0][1 + 1]) });
       this.xValue++;
       this.yValue = parseInt(data[0][1]);
     }
-
     this.chartOptions.data[0].dataPoints = this.dataPoints
-
     this.chart.render();
-
   }
 
   filterEmptyStrings(array: string[]): string[] {
-
     return array.filter(item => !!item);
-
   }
-
 }

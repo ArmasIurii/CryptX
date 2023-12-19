@@ -1,10 +1,5 @@
 <app-nav-bar> </app-nav-bar>
-<div class="theme-buttons">
-  <button mat-button (click)="setDeepPurpleTheme()">deep-purple Theme</button>
-  <button mat-button (click)="setIndigoPinkTheme()">indigo-pink Theme</button>
-  <button mat-button (click)="setPinkTheme()">Pink Theme</button>
-  <button mat-button (click)="setPurpleTheme()">Purple Theme</button>
-</div>
+
 <div class="container">
   <app-hero></app-hero>
 
@@ -54,7 +49,7 @@
     <ng-container matColumnDef="market_cap">
       <th mat-header-cell *matHeaderCellDef>Market Cap</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.market_cap | currency:'USD' }}
+        {{ element.market_cap | number }}
       </td>
     </ng-container>
 

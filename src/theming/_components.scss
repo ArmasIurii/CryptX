@@ -10,11 +10,6 @@ $deep-purple-primary: mat-palette($mat-deep-purple);
 $deep-purple-accent: mat-palette($mat-pink, A200, A100, A400);
 $deep-purple-theme: mat-light-theme($deep-purple-primary, $deep-purple-accent);
 
-// indigo-pink
-$indigo-pink-primary: mat-palette($mat-indigo);
-$indigo-pink-accent: mat-palette($mat-gray, A200);
-$indigo-pink-theme: mat-dark-theme($indigo-pink-primary, $indigo-pink-accent);
-
 // mat-pink
 $mat-pink-primary: mat-palette($mat-pink);
 $mat-pink-accent: mat-palette($mat-blue-grey, A200, A100, A400);
@@ -25,37 +20,174 @@ $mat-purple-primary: mat-palette($mat-purple);
 $mat-purple-accent: mat-palette($mat-blue-grey, A200, A100, A400); // TBD
 $mat-purple-theme: mat-light-theme($mat-purple-primary, $mat-purple-accent);
 
-$dashboard-background: rgb(13, 18, 23);
-$recomendation-background: rgba(200, 198, 198, 0.181);
-$table-background: rgba(66, 66, 66, 0.147);
+$dashboard-background-light: rgb(255, 255, 255);
+$dashboard-background-dark: rgb(49, 49, 49);
 
+$recomendation-background-light: rgb(244, 244, 244);
+$recomendation-background-dark: rgba(36, 36, 36, 0.964);
+$recomendation-text-color-light: rgb(0, 0, 0);
+$recomendation-text-color-dark: rgb(247, 246, 246);
 
-@include angular-material-theme($deep-purple-theme);
+$coin-details-dialogs-light: rgb(0, 0, 0);
+$coin-details-dialogs-dark: rgb(17, 17, 17);
+
+$converter-text-color-light: rgb(17, 17, 17);
+$converter-text-color-dark: rgb(247, 246, 246);
+
+$table-background-light: rgba(242, 242, 242, 0.974);
+$table-background-dark: rgb(66, 66, 66);
+
+$chips-light: #e0e0e0;
+$chips-dark: rgba(1, 3, 42, 0.844);
+
+$hero-text-color: black;
 
 // Apply the default theme
 [data-theme="deep-purple"] {
   @include angular-material-theme($deep-purple-theme);
-  @include components.dashboard-theme($dashboard-background, $table-background);
-  @include components.recomendation-theme($recomendation-background);
+  @include components.dashboard-theme(
+    $dashboard-background-light,
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-theme(
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-item-theme($recomendation-text-color-light);
+  @include components.hero-theme($hero-text-color);
+  @include components.coin-details-theme(
+    $recomendation-text-color-light,
+    $coin-details-dialogs-light,
+    $chips-light,
+    $chips-dark
+  );
+  @include components.converter-theme(
+    $converter-text-color-light,
+    $coin-details-dialogs-light
+  );
 }
-
-// Dark theme styles
-[data-theme="indigo-pink"] {
-  @include angular-material-theme($indigo-pink-theme);
-  @include components.dashboard-theme($dashboard-background, $table-background);
-  @include components.recomendation-theme($recomendation-background);
+// Apply the default theme
+[data-theme="deep-purple-dark"] {
+  @include angular-material-theme($deep-purple-theme);
+  @include components.dashboard-theme(
+    $dashboard-background-dark,
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-theme(
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-item-theme($recomendation-text-color-dark);
+  @include components.coin-details-theme(
+    $recomendation-text-color-dark,
+    $coin-details-dialogs-dark,
+    $chips-dark,
+    $chips-light
+  );
+  @include components.converter-theme(
+    $converter-text-color-dark,
+    $coin-details-dialogs-dark
+  );
 }
 
 // Custom theme styles
 [data-theme="mat-pink"] {
   @include angular-material-theme($mat-pink-theme);
-  @include components.dashboard-theme($dashboard-background, $table-background);
-  @include components.recomendation-theme($recomendation-background);
+  @include components.dashboard-theme(
+    $dashboard-background-light,
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-theme(
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-item-theme($recomendation-background-dark);
+  @include components.hero-theme($hero-text-color);
+  @include components.coin-details-theme(
+    $recomendation-text-color-light,
+    $coin-details-dialogs-light,
+    $chips-light,
+    $chips-dark
+  );
+  @include components.converter-theme(
+    $converter-text-color-light,
+    $coin-details-dialogs-light
+  );
+}
+// Custom theme styles
+[data-theme="mat-pink-dark"] {
+  @include angular-material-theme($mat-pink-theme);
+  @include components.dashboard-theme(
+    $dashboard-background-dark,
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-theme(
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-item-theme($recomendation-background-dark);
+  @include components.coin-details-theme(
+    $recomendation-text-color-dark,
+    $coin-details-dialogs-dark,
+    $chips-dark,
+    $chips-light
+  );
+  @include components.converter-theme(
+    $converter-text-color-dark,
+    $coin-details-dialogs-dark
+  );
 }
 
 // Custom theme styles
 [data-theme="mat-purple"] {
   @include angular-material-theme($mat-purple-theme);
-  @include components.dashboard-theme($dashboard-background, $table-background);
-  @include components.recomendation-theme($recomendation-background);
+  @include components.dashboard-theme(
+    $dashboard-background-light,
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-theme(
+    $table-background-light,
+    $recomendation-text-color-light
+  );
+  @include components.recomendation-item-theme($recomendation-background-dark);
+  @include components.hero-theme($hero-text-color);
+  @include components.coin-details-theme(
+    $recomendation-text-color-light,
+    $coin-details-dialogs-light,
+    $chips-light,
+    $chips-dark
+  );
+  @include components.converter-theme(
+    $converter-text-color-light,
+    $coin-details-dialogs-light
+  );
+}
+// Custom theme styles
+[data-theme="mat-purple-dark"] {
+  @include angular-material-theme($mat-purple-theme);
+  @include components.dashboard-theme(
+    $dashboard-background-dark,
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-theme(
+    $table-background-dark,
+    $recomendation-text-color-dark
+  );
+  @include components.recomendation-item-theme($recomendation-background-dark);
+  @include components.coin-details-theme(
+    $recomendation-text-color-dark,
+    $coin-details-dialogs-dark,
+    $chips-dark,
+    $chips-light
+  );
+  @include components.converter-theme(
+    $converter-text-color-dark,
+    $coin-details-dialogs-dark
+  );
 }

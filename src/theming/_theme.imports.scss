@@ -1,3 +1,7 @@
 @forward './../app/components/dashboard/dashboard' as dashboard-*;
 @forward './../app/components/recomendation/recomendation' as recomendation-*;
+@forward './../app/components/recomendation/components/recomendation-item/recomendation-item' as recomendation-item-*;
 @forward './../app/_app.component' as app-*;
+@forward './../app/components/hero/hero' as hero-*;
+@forward './../app/components/coin-details/coin-details' as coin-details-*;
+@forward './../app/components/converter/converter' as converter-*;

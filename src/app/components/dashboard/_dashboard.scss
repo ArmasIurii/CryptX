@@ -1,20 +1,31 @@
 @use "@angular/material" as mat;
 
-@mixin color($background-color, $table-background) {
+@mixin color($background-color, $table-background, $text-color) {
   background-color: $background-color;
+  $text-color: $text-color;
 
-  .mat-mdc-table {
-    background: $table-background;
-  }
-  
-  .mat-mdc-table .mdc-data-table__row {
-    background-color: transparent;
+  app-dashboard {
+    .mdc-data-table__header-cell {
+      background-color: #{$table-background};
+    }
+    h1,
+    table {
+      color: $text-color;
+    }
+    .mdc-data-table__pagination-total,
+    .mdc-data-table__pagination-rows-per-page-label,
+    .mdc-data-table__cell,
+    .mdc-data-table__header-cell {
+      color: #{$text-color};
+      background-color: #{$table-background};
+    }
+
   }
 }
 
-@mixin theme($background-color, $table-background) {
+@mixin theme($background-color, $table-background, $text-color) {
   $background-color: $background-color;
   $table-background: $table-background;
 
-  @include color($background-color, $table-background);
+  @include color($background-color, $table-background, $text-color);
 }
